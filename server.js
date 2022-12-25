@@ -1,12 +1,54 @@
 const express = require("express")
 const app = express()
-const PORT = 12345
+const bodyParser = require("body-parser")
+const session = require("express-session")
+require("./server/DB")
+require('dotenv').config();
+const PORT = process.env.PORT
+const Contact = require("./model/Contact")
+const User = require("./model/Users")
+const nodemailer = require("nodemailer")
+const { check, validationResult } = require("express-validator")
+const Validator = require("fastest-validator");
 
 
 app.set("view engine", "ejs")
+app.use(express.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(__dirname + "/public"))
 
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }
+}))
+
 app.get("/", (req, res) => {
+    // var transporter = nodemailer.createTransport({
+    //     service: 'gmail',
+    //     port: 587,
+    //     auth: {
+    //         user: 'sharmarajat687@gmail.com',
+    //         pass: '1611340576@rajat#sharma'
+    //     }
+    // });
+
+    // var mailOptions = {
+    //     from: 'sharmarajat687@gmail.com',
+    //     to: 'sharma.ruchi1207@yahoo.com',
+    //     subject: 'Sending Email using Node.js',
+    //     text: 'That was easy!'
+    // };
+
+    // transporter.sendMail(mailOptions, function (error, info) {
+    //     if (error) {
+    //         console.log(error);
+    //     } else {
+    //         console.log('Email sent: ' + info.response);
+    //     }
+    // });
     res.render("index")
 })
 
@@ -14,13 +56,39 @@ app.get("/contact", (req, res) => {
     res.render("contact")
 })
 
+app.post("/contact", async (req, res) => {
+    let data = await Contact(req.body);
+    data = data.save();
+    res.send(req.body)
+})
+
 app.get("/login", (req, res) => {
     res.render("login")
 })
 
-app.post("/login1", (req, res) => {
-    res.render(req.body)
+app.post("/login", async (req, res) => {
+    const schema = {
+        email: { type: "email", label: "Email Address" }
+    };
+    const check = v.compile(schema);
+
+    let data = await User.findOne({ email: req.body.email })
+    if (data) {
+        if (data.password == req.body.password) {
+            req.session.email = req.body.email
+            res.send({ message: "User Found" })
+        }
+        else {
+            res.send({ message: "Password Not Matched" })
+        }
+    }
 })
+
+
+app.get("/register", (req, res) => {
+    res.render("register")
+})
+
 
 app.get("/courses", (req, res) => {
     res.render("courses")
