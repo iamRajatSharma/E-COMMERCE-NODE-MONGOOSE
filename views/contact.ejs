@@ -63,7 +63,20 @@
                             </div>
                             <div class="col-lg-7 col-md-7">
                                 <form class="contact-bx" action="/contact" method="POST">
-                                    <div class="ajax-message"></div>
+                                    <% 
+                                        if(typeof msg!= "undefined"){
+                                            if(flag==1){ %>
+                                                <div class="alert alert-danger">
+                                                    <strong><%= msg %></strong>
+                                                </div>
+                                            <% }
+                                            else{%>
+                                                <div class="alert alert-success">
+                                                    <strong><%= msg %></strong>
+                                                </div>
+                                            <%}
+                                        }
+                                    %> 
                                     <div class="heading-bx left">
                                         <h2 class="title-head">Get In <span>Touch</span></h2>
                                         <p>It is a long established fact that a reader will be distracted by the
@@ -74,7 +87,7 @@
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <label>Your Name</label>
-                                                    <input name="name" type="text" required class="form-control">
+                                                    <input name="name" type="text"  class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -82,7 +95,7 @@
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <label>Your Email Address</label>
-                                                    <input name="email" type="text" class="form-control" required>
+                                                    <input name="email" type="text" class="form-control" >
                                                 </div>
                                             </div>
                                         </div>
@@ -90,7 +103,7 @@
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <label>Your Phone</label>
-                                                    <input name="mobile" type="text" required class="form-control">
+                                                    <input name="mobile" type="text"  class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -98,7 +111,7 @@
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <label>Subject</label>
-                                                    <input name="subject" type="text" required class="form-control">
+                                                    <input name="subject" type="text"  class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -107,12 +120,12 @@
                                                 <div class="input-group">
                                                     <label>Type Message</label>
                                                     <textarea name="message" rows="4" class="form-control"
-                                                        required></textarea>
+                                                        ></textarea>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
-                                            <button name="submit" type="submit" value="Submit" class="btn button-md">
+                                            <button type="submit" class="btn button-md">
                                                 Send Message</button>
                                         </div>
                                     </div>
