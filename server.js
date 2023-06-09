@@ -10,13 +10,15 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.static(__dirname + "/public"))
 app.use("/admin", require("./Routes/adminRoutes"))
+app.use("/", require("./Routes/homeRoutes"))
 app.use("/", require("./Routes/userRoutes"))
+app.use("/", require("./Routes/courseRoutes"))
 
 
 // display error page
-// app.get("*", (req, res) => {``
-//     res.render("error")
-// })
+app.get("*", (req, res) => {``
+    res.render("error")
+})
 
 // set server port 
 app.listen(process.env.PORT, (err) => {
