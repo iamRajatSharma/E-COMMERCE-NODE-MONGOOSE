@@ -1,0 +1,28 @@
+[
+    {
+        "name":"Java Fundamentals",
+        "category":"Java",
+        "lecture":"",
+        "quiz":"",
+        "duration":"",
+        "skill_level":"",
+        "language":"",
+        "students":"",
+        "assesments":"",
+        "image":"",
+        "price":"",
+        "selling_price":"",
+        "description":"",
+        "certificate":"",
+        "outcomes":"",
+        "creator":"",
+        "creator_email":"",
+        "review":[
+            {
+                "name":"",
+                "email":"",
+                "comment":""
+            }
+        ]
+    }
+]

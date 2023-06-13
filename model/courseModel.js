@@ -5,6 +5,10 @@ const courses = new mongoose.Schema({
         type: String,
         required: true
     },
+    category: {
+        type: String,
+        required: true
+    },
     lecture: {
         type: Number,
         required: true

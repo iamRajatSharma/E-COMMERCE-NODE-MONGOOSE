@@ -1,5 +1,6 @@
 const express = require("express")
 const routes = express.Router()
+const userController = require("../controllers/userController")
 // const userController = require("../controllers/userController")
 // const contactController = require("../controllers/contactController")
 // const session = require("express-session")
@@ -79,17 +80,11 @@ const routes = express.Router()
 //     res.render("membership")
 // })
 
-routes.get("/profile", (req, res) => {
-    res.render("profile")
-})
+routes.get("/profile", userController.profile)
 
-routes.get("/change_password", (req, res) => {
-    res.render("change_password")
-})
+routes.get("/change_password", userController.change_password)
 
-routes.get("/enrolled_courses", (req, res) => {
-    res.render("enrolled_courses")
-})
+routes.get("/enrolled_courses", userController.enrolled_courses)
 
 
 // // ##### display search page #####

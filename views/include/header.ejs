@@ -75,11 +75,9 @@
                         <li class="active"><a href="/faq">FAQ's </a></li>
                         <li><a href="javascript:;">Our Courses <i class="fa fa-chevron-down"></i></a>
                             <ul class="sub-menu">
-                                <li><a href="blog-classic-grid.html">Blog Classic</a></li>
-                                <li><a href="blog-classic-sidebar.html">Blog Classic Sidebar</a></li>
-                                <li><a href="blog-list-sidebar.html">Blog List Sidebar</a></li>
-                                <li><a href="blog-standard-sidebar.html">Blog Standard Sidebar</a></li>
-                                <li><a href="blog-details.html">Blog Details</a></li>
+                                <% categoriesList.forEach((item)=>{ %> 
+                                    <li><a href="blog-classic-grid.html"><%= item.name %></a></li>
+                                <% }) %>
                             </ul>
                         </li>
                     </ul>

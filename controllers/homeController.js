@@ -1,8 +1,10 @@
 const db = require("mongoose")
 const User = require("../model/userModel")
+const Category = require("./categoryController")
+const Contact = require("../model/contactModel")
 
-const home = (req, res) => {
-    res.render("index")
+const home = async (req, res) => {
+    res.render("index", { categoriesList: await Category.Categories() })
 }
 
 const register = (req, res) => {
@@ -31,8 +33,35 @@ const doRegister = async (req, res) => {
 
 }
 
-const contact = (req, res) => {
-    res.render("contact")
+const contact = async (req, res) => {
+    res.render("contact", { categoriesList: await Category.Categories() })
+}
+
+const saveFormData = async (req, res) => {
+    // try {
+    const name = req.body.name
+    const email = req.body.email
+    const mobile = req.body.mobile
+    const subject = req.body.subject
+    const message = req.body.message
+    if (name && email && mobile && subject && message) {
+        const data = new Contact({
+            name, email, mobile, subject, message
+        })
+        const result = await data.save()
+        if (result) {
+            return res.render("contact", { result, "msg": "Form Saved Successfully.", flag: 0, categoriesList: await Category.Categories() })
+        }
+        else {
+            return res.render("contact", { "msg": "Something Went Wrong", flag: 1, categoriesList: await Category.Categories() })
+        }
+    } else {
+        return res.render("contact", { "msg": "All Fields Required", flag: 1, categoriesList: await Category.Categories() })
+    }
+    // }
+    // catch (err) {
+    //     return res.render("contact", { "msg": err, flag: 1, categoriesList: await Category.Categories() })
+    // }
 }
 
 const login = (req, res) => {
@@ -66,12 +95,12 @@ const doLogin = async (req, res) => {
 
 }
 
-const faq = (req, res) => {
-    res.render("faq")
+const faq = async (req, res) => {
+    res.render("faq", { categoriesList: await Category.Categories() })
 }
 
-const about = (req, res) => {
-    res.render("about")
+const about = async (req, res) => {
+    res.render("about", { categoriesList: await Category.Categories() })
 }
 
 const forgot_password = (req, res) => {
@@ -104,7 +133,8 @@ module.exports = {
     forgot_password,
     doRegister,
     doLogin,
-    doForgotPassword
+    doForgotPassword,
+    saveFormData
 }
 
 // secure password

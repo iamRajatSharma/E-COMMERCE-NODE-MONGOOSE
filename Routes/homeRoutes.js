@@ -16,6 +16,8 @@ router.post("/register", homeController.doRegister)
 
 router.get("/contact", homeController.contact)
 
+router.post("/contact", homeController.saveFormData)
+
 router.get("/login", homeController.login)
 
 router.post("/login", homeController.doLogin)
@@ -25,6 +27,7 @@ router.get("/faq", homeController.faq)
 router.get("/about", homeController.about)
 
 router.get("/forgot-password", homeController.forgot_password)
+
 router.post("/forgot-password", homeController.doForgotPassword)
 
 

@@ -1,9 +1,11 @@
-const courses_details = (req, res) => {
-    res.render("course-details")
+const Category = require("../controllers/categoryController")
+
+const courses_details = async (req, res) => {
+    res.render("course-details", { categoriesList: await Category.Categories() })
 }
 
-const search = (req, res) => {
-    res.render("search")
+const search = async (req, res) => {
+    res.render("search", { categoriesList: await Category.Categories() })
 }
 
 
